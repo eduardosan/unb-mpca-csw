@@ -4,9 +4,19 @@ var request = require('request')
   , mongoose = require ('mongoose') 
   , format = require('util').format;
 
-mongoose.connect('mongodb://localhost/unb_csw');
+//mongoose.connect('mongodb://localhost/unb_csw');
 
-var db = mongoose.connection;
+//var db = mongoose.connection;
+
+// Set default node environment to development
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+// Application Config
+var config = require('../lib/config/config');
+
+// Connect to database
+var db = mongoose.connect(config.mongo.uri, config.mongo.options);
+var db = db.connection;
 
 var dados = db.collection('municipios');
 dados.remove({},function(err,numRem){

@@ -1,20 +1,29 @@
-var request = require('request')
-  , cheerio = require('cheerio')
-  , async = require('async')
-  , mongoose = require ('mongoose') 
-  , format = require('util').format;
+var request = require('request'),
+   cheerio = require('cheerio'),
+   async = require('async'),
+   mongoose = require ('mongoose'),
+   format = require('util').format;
 
-mongoose.connect('mongodb://localhost/unb_csw');
+//mongoose.connect('mongodb://localhost/unb_csw');
+//var db = mongoose.connection;
 
-var db = mongoose.connection;
+// Set default node environment to development
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+// Application Config
+var config = require('../lib/config/config');
+
+// Connect to database
+var db = mongoose.connect(config.mongo.uri, config.mongo.options);
+var db = db.connection;
 
 var dados = db.collection('municipios');
 dados.remove({},function(err,numRem){
-           console.log('limpa o banco antes de inserir os municipios' + numRem);
+           console.log('limpa o banco antes de inserir os municipios: ' + numRem);
 });
 db.on('error', console.error);
 db.once('open', function() {
-	console.log('Conectado ao MongoDB.')
+	console.log('Conectado ao MongoDB.');
 		
 	var municipio = mongoose.model('municipio', { nome: String, cod: String,  uf: String });
 			
@@ -28,8 +37,9 @@ db.once('open', function() {
 	async.eachLimit(ufs, concurrency, function (uf, next) {
 		var url = format('http://portaldatransparencia.gov.br/PortalTransparenciaListaCidades.asp?Exercicio=2013&SelecaoUF=1&SiglaUF=%s#', uf);
 		request(url, function (err, response, body) {
-			if (err)
-				throw err;
+			if (err) {
+                throw err;
+            }
 			var $ = cheerio.load(body);
 			$('p[class="paginaAtual"]').each(function () { 
 				var numpag = ($(this).text()).trim();	

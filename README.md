@@ -41,6 +41,7 @@ Para executar o crawler e popular o banco
  - De dentro da pasta do projeto, execute `npm install request`
  - De dentro da pasta do projeto, execute `npm install cheerio`
  - De dentro da pasta do projeto, execute `npm install async`
+ - De dentro da pasta do projeto, execute `npm install dns`
  - De dentro da pasta `crawler`, execute `node buscaMunicipios.js`
 
 Para publicar no ambiente de produção
