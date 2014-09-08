@@ -30,6 +30,9 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 // Populate empty DB with sample data
 require('./lib/config/dummydata');
 
+// Global var to store environment
+global.__base = __dirname + '/';
+
 var app = express();
 
 // Express settings
