@@ -21,6 +21,10 @@ angular.module('unbMpcaCswApp', [
         templateUrl: 'partials/municipio',
         controller: 'detalhaMunicipioCtrl'
       })
+      .when('/municipio2/:municipioId', {
+        templateUrl: 'partials/municipio2',
+        controller: 'detalhaMunicipioCtrl2'
+      })
 	  .when('/consultaRanking/:tipo/:ordem/:uf', {
         templateUrl: 'partials/consultaRanking',
         controller: 'consultaRankingCtrl'
