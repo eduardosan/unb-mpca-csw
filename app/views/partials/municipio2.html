@@ -1,0 +1,65 @@
+<h2>Munic&iacute;pio de {{municipio.nome}}</h2>
+ 
+<table width="100%" class="table table-hover">
+	<tr><td width="200px">UF</td><td>{{municipio.uf}}</td></tr>
+	<tr><td>IDH</td><td>{{municipio.idh}}</td></tr>
+</table>
+<p>Transferências de Recursos da União</p>
+
+<div class="alert alert-warning" role="alert">
+    <p>Considerando os investimentos municipais, os investimentos federais são irrelevantes. Isso acontece porque saúde e educação são responsabilidade dos municípios</p>
+    <a href={{nextLink}} class="alert-link">Voltar à página anterior</a>
+</div>
+
+<table width="100%" class="table table-hover">
+	<tr>
+        <th>Ano</th>
+        <th>Saúde</th>
+        <th>Educação</th>
+        <th>Saúde Municipal</th>
+        <th>Educação Municipal</th>
+    </tr>
+	<tr>
+        <td>2010</td>
+        <td>R$ {{municipio.investimento.saude.2010}}</td>
+        <td>R$ {{municipio.investimento.educacao.2010}}</td>
+        <td>R$ {{municipio.investimento_municipal.saude.2010}}</td>
+        <td>R$ {{municipio.investimento_municipal.educacao.2010}}</td>
+    </tr>
+	<tr>
+        <td>2011</td>
+        <td>R$ {{municipio.investimento.saude.2011}}</td>
+        <td>R$ {{municipio.investimento.educacao.2011}}</td>
+        <td>R$ {{municipio.investimento_municipal.saude.2011}}</td>
+        <td>R$ {{municipio.investimento_municipal.educacao.2011}}</td>
+    </tr>
+	<tr>
+        <td>2012</td>
+        <td>R$ {{municipio.investimento.saude.2012}}</td>
+        <td>R$ {{municipio.investimento.educacao.2012}}</td>
+        <td>R$ {{municipio.investimento_municipal.saude.2012}}</td>
+        <td>R$ {{municipio.investimento_municipal.educacao.2012}}</td>
+    </tr>
+	<tr>
+        <td>2013</td>
+        <td>R$ {{municipio.investimento.saude.2013}}</td>
+        <td>R$ {{municipio.investimento.educacao.2013}}</td>
+        <td>R$ {{municipio.investimento_municipal.saude.2013}}</td>
+        <td>R$ {{municipio.investimento_municipal.educacao.2013}}</td>
+    </tr>
+</table>
+
+
+<table width="100%" class="table table-hover">
+<div >
+	<div ac-chart="chartType" ac-data="data" ac-config="config" id='chart' class='chart'></div>
+</div>
+</table>
+
+<div>
+    <p>
+        <a href={{nextLink}} class="btn btn-default" role="button">
+            <span class="glyphicon glyphicon-arrow-left"></span> Voltar à página anterior
+        </a>
+    </p>
+</div>

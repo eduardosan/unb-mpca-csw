@@ -169,11 +169,55 @@ unbControllers.controller('consultaMunicipiosResultadoCtrl', function ($http, $s
 			position:'left'
 		}
 	}
+
+        $scope.nextLink = '/municipio2/' + $routeParams.municipioId;
 	
 		
 	});
  });
- 
+
+unbControllers.controller('detalhaMunicipioCtrl2', function ($scope, $http, $routeParams) {
+    $http.get('/api/municipios?id='+$routeParams.municipioId).success(function(arrayMunicipios) {
+        $scope.municipio = arrayMunicipios[0];
+
+        $scope.data = {
+            series: ['Saúde', 'Educação', 'Saúde Municipal', 'Educação Municipal'],
+            data : [{
+                x : "2010",
+                y: [$scope.municipio.investimento["saude"]["2010"], $scope.municipio.investimento["educacao"]["2010"], $scope.municipio.investimento_municipal["saude"]["2010"], $scope.municipio.investimento_municipal["educacao"]["2010"]]
+
+            },
+                {
+                    x : "2011",
+                    y: [$scope.municipio.investimento["saude"]["2011"], $scope.municipio.investimento["educacao"]["2011"], $scope.municipio.investimento_municipal["saude"]["2011"], $scope.municipio.investimento_municipal["educacao"]["2011"]]
+                },
+                {
+                    x : "2012",
+                    y: [$scope.municipio.investimento["saude"]["2012"], $scope.municipio.investimento["educacao"]["2012"], $scope.municipio.investimento_municipal["saude"]["2012"], $scope.municipio.investimento_municipal["educacao"]["2012"]]
+                },
+                {
+                    x : "2013",
+                    y: [$scope.municipio.investimento["saude"]["2013"], $scope.municipio.investimento["educacao"]["2013"], $scope.municipio.investimento_municipal["saude"]["2013"], $scope.municipio.investimento_municipal["educacao"]["2013"]]
+                }]
+        }
+
+        $scope.chartType = 'bar';
+
+        $scope.config = {
+            labels: false,
+            title : "Gráfico",
+            legend : {
+                display:true,
+                position:'left'
+            }
+        }
+
+        $scope.nextLink = '/municipio/' + $routeParams.municipioId;
+
+
+    });
+});
+
  
 unbControllers.controller('compararCtrl', function ($http, $scope, $rootScope, $filter) {	
 	var tamanho = ($rootScope.listaSelecionados).length;
